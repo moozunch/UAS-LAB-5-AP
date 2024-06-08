@@ -2,18 +2,9 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include "header/login.h"
 
 using namespace std;
-
-int login;
-void loginOption () {
-    cout << "=========== My Travel ===========\n";
-    cout << "1. Admin\n";
-    cout << "2. User\n";
-    cout << "3. Exit\n";
-    cout << "Pilih Opsi Login anda: ";
-    cin >> login;
-}
 
 struct User {
     string login;
@@ -22,9 +13,9 @@ struct User {
 };
 
 struct Date {
-    char day[3]; // null terminator included
-    char month[3];
-    char year[5];
+    string day;
+    string month;
+    string year;
 };
 
 struct Ticket {
@@ -65,6 +56,7 @@ public:
         } else {
             cout << "Tickets List:" << endl;
             for (int i = 0; i < tickets.size(); ++i) {
+                cout << "------------------------" << endl;
                 cout << "Ticket Index " << i << endl;
                 cout << "From " << tickets[i].departure << " To " << tickets[i].destination << endl;
                 cout << "Date: " << tickets[i].date.day << "/" << tickets[i].date.month << "/" << tickets[i].date.year << endl;
@@ -102,6 +94,7 @@ public:
         } else {
             cout << "Booked Tickets:" << endl;
             for (const auto& ticket : bookedTickets) {
+                cout << "------------------------" << endl;
                 cout << "Destination: " << ticket.destination << endl;
                 cout << "Date: " << ticket.date.day << "/" << ticket.date.month << "/" << ticket.date.year << endl;
                 cout << "Time: " << ticket.time << endl;
@@ -156,19 +149,20 @@ int main() {
     TicketBookingSystem bookingSystem;
     string username, password;
     int option;
+    int login; 
 
     do {
-        loginOption();
+        login = loginOption(); 
 
-        if (login == 1) {  // Admin
+        if (login == 1) {  
             cout << "Username: ";
             cin >> username;
             cout << "Password: ";
             cin >> password;
-            system("cls");
 
             if (username == "admin" && password == "admin123") {
                 do {
+                    
                     cout << "Options:\n";
                     cout << "1) View tickets\n";
                     cout << "2) Add tickets\n";
@@ -222,7 +216,7 @@ int main() {
                 cout << "Invalid username or password!" << endl;
             }
         } else if (login == 2) {  // User
-            do {
+            do {               
                 cout << "Options:\n";
                 cout << "1) Buy Ticket\n";
                 cout << "2) View Ticket History\n";
