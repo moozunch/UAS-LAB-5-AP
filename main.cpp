@@ -9,19 +9,22 @@ using namespace std;
 
 string searchCode;
 bool found;
-struct User {
+struct User
+{
     string login;
     string username;
     string password;
 };
 
-struct Date {
-    string day;
-    string month;
-    string year;
+struct Date
+{
+    int day;
+    int month;
+    int year;
 };
 
-struct Ticket {
+struct Ticket
+{
     long price = 25000;
     string departure;
     string destination;
@@ -30,26 +33,32 @@ struct Ticket {
     string time;
 };
 
-struct Todo {
+struct Todo
+{
     string task;
     bool done;
 };
 
-class LoginSystem { // class admin
+class LoginSystem
+{ // class admin
 private:
     vector<Ticket> tickets;
 
 public:
-    void addTicket(const Ticket &ticket) {
+    void addTicket(const Ticket &ticket)
+    {
         tickets.push_back(ticket);
         cout << "Ticket added successfully!" << endl;
         system("PAUSE");
     }
 
-    void deleteTicket(const string &searchCode) {
+    void deleteTicket(const string &searchCode)
+    {
         found = false;
-        for (auto targetCode = tickets.begin(); targetCode != tickets.end(); targetCode++){
-            if (targetCode -> code == searchCode){
+        for (auto targetCode = tickets.begin(); targetCode != tickets.end(); targetCode++)
+        {
+            if (targetCode->code == searchCode)
+            {
                 targetCode = tickets.erase(targetCode);
                 cout << "Ticket with code " << searchCode << " have been removed";
                 found = true;
@@ -57,20 +66,26 @@ public:
                 break;
             }
         }
-        if(!found) {
-                cout << "There are no ticket with code " << searchCode;
-                system("PAUSE");
-            }
+        if (!found)
+        {
+            cout << "There are no ticket with code " << searchCode;
+            system("PAUSE");
+        }
     }
 
-    void displayTickets() {
+    void displayTickets()
+    {
         system("CLS");
-        if (tickets.empty()) {
+        if (tickets.empty())
+        {
             cout << "No tickets available!" << endl;
             system("PAUSE");
-        } else {
+        }
+        else
+        {
             cout << "Tickets List:" << endl;
-            for (int i = 0; i < tickets.size(); i++) {
+            for (int i = 0; i < tickets.size(); i++)
+            {
                 cout << "------------------------" << endl;
                 cout << "Ticket Index " << i << endl;
                 cout << "From " << tickets[i].departure << " To " << tickets[i].destination << endl;
@@ -84,11 +99,14 @@ public:
         }
     }
 
-    void showTicket(const string &searchCode) {
+    void showTicket(const string &searchCode)
+    {
         system("CLS");
         found = false;
-        for (auto const &ticket : tickets) {
-            if (ticket.code == searchCode) {
+        for (auto const &ticket : tickets)
+        {
+            if (ticket.code == searchCode)
+            {
                 cout << "Ticket Found:" << endl;
                 cout << "------------------------" << endl;
                 cout << "From: " << ticket.departure << endl;
@@ -103,45 +121,76 @@ public:
                 break;
             }
         }
-    if (!found) {
-        cout << "There are no tickets with code " << searchCode << endl;
-        system("PAUSE");
+        if (!found)
+        {
+            cout << "There are no tickets with code " << searchCode << endl;
+            system("PAUSE");
+        }
     }
-}
 
-    Ticket getTicket(int index) {
+    Ticket getTicket(const string &searchCode)
+    {
         system("CLS");
-        if (index >= 0 && index < tickets.size()) {
-            return tickets[index];
-            system("PAUSE");
-        } else {
-            cout << "Invalid ticket index!" << endl;
+        found = false;
+        Ticket foundTicket;
+
+        for (const auto &ticket : tickets)
+        {
+            if (ticket.code == searchCode)
+            {
+                foundTicket = ticket;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+        {
             return Ticket{};
-            system("PAUSE");
+        }
+        else
+        {
+            cout << "Ticket Found:" << endl;
+            cout << "------------------------" << endl;
+            cout << "From: " << foundTicket.departure << endl;
+            cout << "To: " << foundTicket.destination << endl;
+            cout << "Date: " << foundTicket.date.day << "/" << foundTicket.date.month << "/" << foundTicket.date.year << endl;
+            cout << "Time: " << foundTicket.time << endl;
+            cout << "Price: Rp" << foundTicket.price << endl;
+            cout << "Code   : " << foundTicket.code << endl;
+            cout << "------------------------" << endl;
+            return foundTicket;
         }
     }
 };
 
-class TicketBookingSystem { // class pembeli
+class TicketBookingSystem
+{ // class pembeli
 private:
     vector<Ticket> bookedTickets;
     vector<Todo> todos;
 
 public:
-    void bookTicket(const Ticket &ticket) {
+    void bookTicket(const Ticket &ticket)
+    {
         bookedTickets.push_back(ticket);
         cout << "Ticket booked successfully!" << endl;
         system("PAUSE");
     }
 
-    void displayBookedTickets() {
+    void displayBookedTickets()
+    {
         system("CLS");
-        if (bookedTickets.empty()) {
+        if (bookedTickets.empty())
+        {
             cout << "No tickets booked yet!" << endl;
             system("PAUSE");
-        } else {
+        }
+        else
+        {
             cout << "Booked Tickets:" << endl;
-            for (const auto &ticket : bookedTickets) {
+            for (const auto &ticket : bookedTickets)
+            {
                 cout << "------------------------" << endl;
                 cout << "Destination: " << ticket.destination << endl;
                 cout << "Date: " << ticket.date.day << "/" << ticket.date.month << "/" << ticket.date.year << endl;
@@ -153,11 +202,13 @@ public:
         }
     }
 
-    vector<Ticket> getBookedTickets() const {
+    vector<Ticket> getBookedTickets() const
+    {
         return bookedTickets;
     }
 
-    void addTodo(const string &task) {
+    void addTodo(const string &task)
+    {
         Todo todo;
         todo.task = task;
         todo.done = false;
@@ -166,14 +217,19 @@ public:
         system("PAUSE");
     }
 
-    void displayTodos() {
+    void displayTodos()
+    {
         system("CLS");
-        if (todos.empty()) {
+        if (todos.empty())
+        {
             cout << "No todos added yet!" << endl;
             system("PAUSE");
-        } else {
+        }
+        else
+        {
             cout << "Todos:" << endl;
-            for (const auto& todo : todos) {
+            for (const auto &todo : todos)
+            {
                 cout << "Task: " << todo.task << endl;
                 cout << "Status: " << (todo.done ? "Done" : "Not Done") << endl;
                 cout << "------------------------" << endl;
@@ -182,32 +238,41 @@ public:
         }
     }
 
-    void markTodoAsDone(int index) {
+    void markTodoAsDone(int index)
+    {
         system("CLS");
-        if (index >= 0 && index < todos.size()) {
+        if (index >= 0 && index < todos.size())
+        {
             todos[index].done = true;
             cout << "Todo marked as done!" << endl;
             system("PAUSE");
-        } else {
+        }
+        else
+        {
             cout << "Invalid todo index!" << endl;
             system("PAUSE");
         }
     }
 
-    void deleteTodo(int index) {
+    void deleteTodo(int index)
+    {
         system("CLS");
-        if (index >= 0 && index < todos.size()) {
+        if (index >= 0 && index < todos.size())
+        {
             todos.erase(todos.begin() + index);
             cout << "Todo deleted successfully!" << endl;
             system("PAUSE");
-        } else {
+        }
+        else
+        {
             cout << "Invalid todo index!" << endl;
             system("PAUSE");
         }
     }
 };
 
-int main() {
+int main()
+{
     LoginSystem loginSystem;
     TicketBookingSystem bookingSystem;
     string username, password;
@@ -216,17 +281,21 @@ int main() {
     int login;
     int index;
 
-    do {
-        login = loginOption(); 
+    do
+    {
+        login = loginOption();
 
-        if (login == 1) {// admin
+        if (login == 1)
+        { // admin
             cout << "Username: ";
             cin >> username;
             cout << "Password: ";
             cin >> password;
 
-            if (statusLogin(username.c_str(), savedUsername.c_str(), password.c_str(), savedPassword.c_str())) {
-                do {
+            if (statusLogin(username.c_str(), savedUsername.c_str(), password.c_str(), savedPassword.c_str()))
+            {
+                do
+                {
                     system("CLS");
                     cout << "Options:\n";
                     cout << "1) View all tickets\n";
@@ -237,166 +306,211 @@ int main() {
                     cout << "Choose an option: ";
                     cin >> option;
 
-                    switch (option) {
-                        case 1: {
-                            loginSystem.displayTickets();
-                            break;
-                        }
-                        case 2: {
-                            Ticket ticket;
+                    switch (option)
+                    {
+                    case 1:
+                    {
+                        loginSystem.displayTickets();
+                        break;
+                    }
+                    case 2:
+                    {
+                        Ticket ticket;
 
-                            system("CLS");
-                            do {
-                                cout << "Enter Departure    : ";
-                                cin >> ticket.departure;
-                            } while (containsDigit(ticket.departure));
+                        system("CLS");
+                        do
+                        {
+                            cout << "Enter Departure    : ";
+                            cin >> ticket.departure;
+                        } while (containsDigit(ticket.departure));
 
-                            do{
-                                cout << "Enter Destination  : ";
-                                cin >> ticket.destination;
-                            } while (containsDigit(ticket.destination));
+                        do
+                        {
+                            cout << "Enter Destination  : ";
+                            cin >> ticket.destination;
+                        } while (containsDigit(ticket.destination));
 
-                            do {
-                                cout << "Enter ticket code  : ";
-                                cin >> ticket.code;
-                            } while (containsDigit(ticket.code));
-
+                        do
+                        {
+                            cout << "Enter ticket code  : ";
+                            cin >> ticket.code;
+                        } while (containsDigit(ticket.code));
+                        do
+                        {
                             cout << "Enter Day (DD)     : ";
                             cin >> ticket.date.day;
                             cout << "Enter Month (MM)   : ";
                             cin >> ticket.date.month;
                             cout << "Enter Year (YYYY)  : ";
                             cin >> ticket.date.year;
+                        } while (isValidDate(ticket.date.day, ticket.date.month, ticket.date.year));
 
-                            do {
-                                cout << "Enter Time         : ";
-                                cin >> ticket.time;
-                            } while (ticket.time.size() != 5 || timeValidation(ticket.time));
-                            loginSystem.addTicket(ticket);
-                            break;
-                        }
-                        case 3: {
-                            cout << "Enter ticket code: ";
-                            cin >> searchCode;
-                            loginSystem.deleteTicket(searchCode);
-                            break;
-                        }
-                        case 4: {
-                            cout << "Enter ticket code: ";
-                            cin >> searchCode;
-                            loginSystem.showTicket(searchCode);
-                            break;
-                        }
-                        case 5: {
-                            cout << "Exiting..." << endl;
-                            break;
-                        }
-                        default: {
-                            cout << "Invalid option!" << endl;
-                            break;
-                        }
+                        do
+                        {
+                            cout << "Enter Time         : ";
+                            cin >> ticket.time;
+                        } while (ticket.time.size() != 5 || timeValidation(ticket.time));
+                        loginSystem.addTicket(ticket);
+                        break;
+                    }
+                    case 3:
+                    {
+                        cout << "Enter ticket code: ";
+                        cin >> searchCode;
+                        loginSystem.deleteTicket(searchCode);
+                        break;
+                    }
+                    case 4:
+                    {
+                        cout << "Enter ticket code: ";
+                        cin >> searchCode;
+                        loginSystem.showTicket(searchCode);
+                        break;
+                    }
+                    case 5:
+                    {
+                        cout << "Exiting..." << endl;
+                        break;
+                    }
+                    default:
+                    {
+                        cout << "Invalid option!" << endl;
+                        break;
+                    }
                     }
                 } while (option != 5);
-            } else {
+            }
+            else
+            {
                 cout << "Invalid username or password!" << endl;
             }
-        } else if (login == 2) {// User
-            do {               
+        }
+        else if (login == 2)
+        { // User
+            do
+            {
                 cout << "Options:\n";
                 cout << "1) Buy Ticket\n";
                 cout << "2) View Ticket History\n";
-                cout << "3) Print Booked Ticket\n";
-                cout << "4) Todo List\n";
+                cout << "3) Todo List\n";
+                cout << "4) Print Booked Ticket\n";
                 cout << "5) Exit\n";
                 cout << "Choose an option: ";
                 cin >> option;
 
-                switch (option) {
-                    case 1: {
-                        loginSystem.displayTickets();
-                        cout << "Enter the index of desired ticket: ";
-                        cin >> index;
-                        Ticket ticket = loginSystem.getTicket(index);
-                        bookingSystem.bookTicket(ticket);
-                        break;
-                    }
-                    case 2: {
-                        bookingSystem.displayBookedTickets();
-                        break;
-                    }
-                    case 3: {
-                        int todoOption;
-                        do {
-                            cout << "Todo List Options:\n";
-                            cout << "1) Add Todo\n";
-                            cout << "2) View Todos\n";
-                            cout << "3) Mark Todo as Done\n";
-                            cout << "4) Delete Todo\n";
-                            cout << "5) Go Back\n";
-                            cout << "Choose an option: ";
-                            cin >> todoOption;
+                switch (option)
+                {
+                case 1:
+                {
+                    loginSystem.displayTickets();
+                    do
+                    {
+                        cout << "Enter the ticket code: ";
+                        cin >> searchCode;
+                    } while (containsDigit(searchCode));
 
-                            switch (todoOption) {
-                                case 1: {
-                                    string task;
-                                    cout << "Enter todo task: ";
-                                    cin.ignore();
-                                    getline(cin, task);
-                                    bookingSystem.addTodo(task);
-                                    break;
-                                }
-                                case 2: {
-                                    bookingSystem.displayTodos();
-                                    break;
-                                }
-                                case 3: {
-                                    cout << "Enter todo index: ";
-                                    cin >> index;
-                                    bookingSystem.markTodoAsDone(index);
-                                    break;
-                                }
-                                case 4: {
-                                    cout << "Enter todo index: ";
-                                    cin >> index;
-                                    bookingSystem.deleteTodo(index);
-                                    break;
-                                }
-                                case 5: {
-                                    break;
-                                }
-                                default: {
-                                    cout << "Invalid option!" << endl;
-                                    break;
-                                }
-                            }
-                        } while (todoOption != 5);
-                        break;
+                    Ticket ticket = loginSystem.getTicket(searchCode);
+                    if (!ticket.code.empty())
+                    {
+                        bookingSystem.bookTicket(ticket);
                     }
-                    case 4: {
-                        vector<Ticket> bookedTickets = bookingSystem.getBookedTickets();
-                        ofstream outFile("bookedTickets.txt");
-                        for (const Ticket& ticket : bookedTickets) {
-                            outFile << "------------------------\n";
-                            outFile << "Price: " << ticket.price << "\n";
-                            outFile << "Departure: " << ticket.departure << "\n";
-                            outFile << "Destination: " << ticket.destination << "\n";
-                            outFile << "Date: " << ticket.date.day << "/" << ticket.date.month << "/" << ticket.date.year << "\n";
-                            outFile << "Time: " << ticket.time << "\n\n";
-                            outFile << "Code: " << ticket.code << "\n";
-                            outFile << "------------------------\n";
+                    else
+                    {
+                        cout << "Ticket with " << searchCode << " not found";
+                    }
+                    break;
+                }
+                case 2:
+                {
+                    bookingSystem.displayBookedTickets();
+                    break;
+                }
+                case 3:
+                {
+                    int todoOption;
+                    do
+                    {
+                        cout << "Todo List Options:\n";
+                        cout << "1) Add Todo\n";
+                        cout << "2) View Todos\n";
+                        cout << "3) Mark Todo as Done\n";
+                        cout << "4) Delete Todo\n";
+                        cout << "5) Go Back\n";
+                        cout << "Choose an option: ";
+                        cin >> todoOption;
+
+                        switch (todoOption)
+                        {
+                        case 1:
+                        {
+                            string task;
+                            cout << "Enter todo task: ";
+                            cin.ignore();
+                            getline(cin, task);
+                            bookingSystem.addTodo(task);
+                            break;
                         }
-                        outFile.close();
-                        cout << "Booked tickets have been printed to bookedTickets.txt\n";
-                        break;
+                        case 2:
+                        {
+                            bookingSystem.displayTodos();
+                            break;
+                        }
+                        case 3:
+                        {
+                            cout << "Enter todo index: ";
+                            cin >> index;
+                            bookingSystem.markTodoAsDone(index);
+                            break;
+                        }
+                        case 4:
+                        {
+                            cout << "Enter todo index: ";
+                            cin >> index;
+                            bookingSystem.deleteTodo(index);
+                            break;
+                        }
+                        case 5:
+                        {
+                            break;
+                        }
+                        default:
+                        {
+                            cout << "Invalid option!" << endl;
+                            break;
+                        }
+                        }
+                    } while (todoOption != 5);
+                    break;
+                }
+                case 4:
+                {
+                    vector<Ticket> bookedTickets = bookingSystem.getBookedTickets();
+                    ofstream outFile("bookedTickets.txt");
+                    for (const Ticket &ticket : bookedTickets)
+                    {
+                        outFile << "------------------------\n";
+                        outFile << "Price: " << ticket.price << "\n";
+                        outFile << "Departure: " << ticket.departure << "\n";
+                        outFile << "Destination: " << ticket.destination << "\n";
+                        outFile << "Date: " << ticket.date.day << "/" << ticket.date.month << "/" << ticket.date.year << "\n";
+                        outFile << "Time: " << ticket.time << "\n\n";
+                        outFile << "Code: " << ticket.code << "\n";
+                        outFile << "------------------------\n";
                     }
-                    case 5: {
-                        cout << "Exiting..." << endl;
-                        break;
-                    }
-                    default: {
-                        cout << "Invalid option!" << endl;
-                        break;
-                    }
+                    outFile.close();
+                    cout << "Booked tickets have been printed to bookedTickets.txt\n";
+                    break;
+                }
+                case 5:
+                {
+                    cout << "Exiting..." << endl;
+                    break;
+                }
+                default:
+                {
+                    cout << "Invalid option!" << endl;
+                    break;
+                }
                 }
             } while (option != 5);
         }
