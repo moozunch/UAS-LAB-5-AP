@@ -23,7 +23,7 @@ struct Date
     int year;
 };
 
-struct Ticket
+struct Ticket //apa aja
 {
     long price = 25000;
     string departure;
