@@ -2,6 +2,7 @@
 #include <cstring>
 #include <vector>
 #include <algorithm>
+#include <fstream>
 #include "header/login.h"
 
 using namespace std;
@@ -152,6 +153,10 @@ public:
         }
     }
 
+    vector<Ticket> getBookedTickets() const {
+        return bookedTickets;
+    }
+
     void addTodo(const string &task) {
         Todo todo;
         todo.task = task;
@@ -300,8 +305,9 @@ int main() {
                 cout << "Options:\n";
                 cout << "1) Buy Ticket\n";
                 cout << "2) View Ticket History\n";
-                cout << "3) Todo List\n";
-                cout << "4) Exit\n";
+                cout << "3) Print Booked Ticket\n";
+                cout << "4) Todo List\n";
+                cout << "5) Exit\n";
                 cout << "Choose an option: ";
                 cin >> option;
 
@@ -367,6 +373,23 @@ int main() {
                         break;
                     }
                     case 4: {
+                        vector<Ticket> bookedTickets = bookingSystem.getBookedTickets();
+                        ofstream outFile("bookedTickets.txt");
+                        for (const Ticket& ticket : bookedTickets) {
+                            outFile << "------------------------\n";
+                            outFile << "Price: " << ticket.price << "\n";
+                            outFile << "Departure: " << ticket.departure << "\n";
+                            outFile << "Destination: " << ticket.destination << "\n";
+                            outFile << "Date: " << ticket.date.day << "/" << ticket.date.month << "/" << ticket.date.year << "\n";
+                            outFile << "Time: " << ticket.time << "\n\n";
+                            outFile << "Code: " << ticket.code << "\n";
+                            outFile << "------------------------\n";
+                        }
+                        outFile.close();
+                        cout << "Booked tickets have been printed to bookedTickets.txt\n";
+                        break;
+                    }
+                    case 5: {
                         cout << "Exiting..." << endl;
                         break;
                     }
@@ -375,7 +398,7 @@ int main() {
                         break;
                     }
                 }
-            } while (option != 4);
+            } while (option != 5);
         }
     } while (login != 3);
 
