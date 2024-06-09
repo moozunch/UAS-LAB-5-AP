@@ -1,11 +1,13 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 #include <vector>
-#include <fstream>
+#include <algorithm>
 #include "header/login.h"
 
 using namespace std;
 
+string searchCode;
+bool found;
 struct User {
     string login;
     string username;
@@ -19,9 +21,10 @@ struct Date {
 };
 
 struct Ticket {
-    string price;
+    long price = 25000;
     string departure;
     string destination;
+    string code;
     Date date;
     string time;
 };
@@ -31,69 +34,113 @@ struct Todo {
     bool done;
 };
 
-class LoginSystem {
+class LoginSystem { // class admin
 private:
     vector<Ticket> tickets;
 
 public:
-    void addTicket(const Ticket& ticket) {
+    void addTicket(const Ticket &ticket) {
         tickets.push_back(ticket);
         cout << "Ticket added successfully!" << endl;
+        system("PAUSE");
     }
 
-    void deleteTicket(int index) {
-        if (index >= 0 && index < tickets.size()) {
-            tickets.erase(tickets.begin() + index);
-            cout << "Ticket deleted successfully!" << endl;
-        } else {
-            cout << "Invalid ticket index!" << endl;
+    void deleteTicket(const string &searchCode) {
+        found = false;
+        for (auto targetCode = tickets.begin(); targetCode != tickets.end(); targetCode++){
+            if (targetCode -> code == searchCode){
+                targetCode = tickets.erase(targetCode);
+                cout << "Ticket with code " << searchCode << " have been removed";
+                found = true;
+                system("PAUSE");
+                break;
+            }
         }
+        if(!found) {
+                cout << "There are no ticket with code " << searchCode;
+                system("PAUSE");
+            }
     }
 
     void displayTickets() {
+        system("CLS");
         if (tickets.empty()) {
             cout << "No tickets available!" << endl;
+            system("PAUSE");
         } else {
             cout << "Tickets List:" << endl;
-            for (int i = 0; i < tickets.size(); ++i) {
+            for (int i = 0; i < tickets.size(); i++) {
                 cout << "------------------------" << endl;
                 cout << "Ticket Index " << i << endl;
                 cout << "From " << tickets[i].departure << " To " << tickets[i].destination << endl;
-                cout << "Date: " << tickets[i].date.day << "/" << tickets[i].date.month << "/" << tickets[i].date.year << endl;
-                cout << "Time: " << tickets[i].time << endl;
-                cout << "Price: Rp" << tickets[i].price << endl;
+                cout << "Date   : " << tickets[i].date.day << "/" << tickets[i].date.month << "/" << tickets[i].date.year << endl;
+                cout << "Time   : " << tickets[i].time << endl;
+                cout << "Price  : Rp" << tickets[i].price << endl;
+                cout << "Code   : " << tickets[i].code << endl;
                 cout << "------------------------" << endl;
             }
+            system("PAUSE");
         }
     }
 
+    void showTicket(const string &searchCode) {
+        system("CLS");
+        found = false;
+        for (auto const &ticket : tickets) {
+            if (ticket.code == searchCode) {
+                cout << "Ticket Found:" << endl;
+                cout << "------------------------" << endl;
+                cout << "From: " << ticket.departure << endl;
+                cout << "To: " << ticket.destination << endl;
+                cout << "Date: " << ticket.date.day << "/" << ticket.date.month << "/" << ticket.date.year << endl;
+                cout << "Time: " << ticket.time << endl;
+                cout << "Price: Rp" << ticket.price << endl;
+                cout << "Code   : " << ticket.code << endl;
+                cout << "------------------------" << endl;
+                found = true;
+                system("PAUSE");
+                break;
+            }
+        }
+    if (!found) {
+        cout << "There are no tickets with code " << searchCode << endl;
+        system("PAUSE");
+    }
+}
+
     Ticket getTicket(int index) {
+        system("CLS");
         if (index >= 0 && index < tickets.size()) {
             return tickets[index];
+            system("PAUSE");
         } else {
             cout << "Invalid ticket index!" << endl;
             return Ticket{};
+            system("PAUSE");
         }
     }
 };
 
-class TicketBookingSystem {
+class TicketBookingSystem { // class pembeli
 private:
     vector<Ticket> bookedTickets;
     vector<Todo> todos;
 
 public:
-    void bookTicket(const Ticket& ticket) {
+    void bookTicket(const Ticket &ticket) {
         bookedTickets.push_back(ticket);
         cout << "Ticket booked successfully!" << endl;
+        system("PAUSE");
     }
 
     void displayBookedTickets() {
+        system("CLS");
         if (bookedTickets.empty()) {
             cout << "No tickets booked yet!" << endl;
+            system("PAUSE");
         } else {
             cout << "Booked Tickets:" << endl;
-            for (const auto& ticket : bookedTickets) {
+            for (const auto &ticket : bookedTickets) {
                 cout << "------------------------" << endl;
                 cout << "Destination: " << ticket.destination << endl;
                 cout << "Date: " << ticket.date.day << "/" << ticket.date.month << "/" << ticket.date.year << endl;
@@ -101,20 +148,24 @@ public:
                 cout << "Price: " << ticket.price << endl;
                 cout << "------------------------" << endl;
             }
+            system("PAUSE");
         }
     }
 
-    void addTodo(const string& task) {
+    void addTodo(const string &task) {
         Todo todo;
         todo.task = task;
         todo.done = false;
         todos.push_back(todo);
         cout << "Todo added successfully!" << endl;
+        system("PAUSE");
     }
 
     void displayTodos() {
+        system("CLS");
         if (todos.empty()) {
             cout << "No todos added yet!" << endl;
+            system("PAUSE");
         } else {
             cout << "Todos:" << endl;
             for (const auto& todo : todos) {
@@ -122,24 +173,31 @@ public:
                 cout << "Status: " << (todo.done ? "Done" : "Not Done") << endl;
                 cout << "------------------------" << endl;
             }
+            system("PAUSE");
         }
     }
 
     void markTodoAsDone(int index) {
+        system("CLS");
         if (index >= 0 && index < todos.size()) {
             todos[index].done = true;
             cout << "Todo marked as done!" << endl;
+            system("PAUSE");
         } else {
             cout << "Invalid todo index!" << endl;
+            system("PAUSE");
         }
     }
 
     void deleteTodo(int index) {
+        system("CLS");
         if (index >= 0 && index < todos.size()) {
             todos.erase(todos.begin() + index);
             cout << "Todo deleted successfully!" << endl;
+            system("PAUSE");
         } else {
             cout << "Invalid todo index!" << endl;
+            system("PAUSE");
         }
     }
 };
@@ -148,26 +206,29 @@ int main() {
     LoginSystem loginSystem;
     TicketBookingSystem bookingSystem;
     string username, password;
+    string savedUsername = "admin", savedPassword = "admin123";
     int option;
-    int login; 
+    int login;
+    int index;
 
     do {
         login = loginOption(); 
 
-        if (login == 1) {  
+        if (login == 1) {// admin
             cout << "Username: ";
             cin >> username;
             cout << "Password: ";
             cin >> password;
 
-            if (username == "admin" && password == "admin123") {
+            if (statusLogin(username.c_str(), savedUsername.c_str(), password.c_str(), savedPassword.c_str())) {
                 do {
-                    
+                    system("CLS");
                     cout << "Options:\n";
-                    cout << "1) View tickets\n";
-                    cout << "2) Add tickets\n";
-                    cout << "3) Delete tickets\n";
-                    cout << "4) Exit\n";
+                    cout << "1) View all tickets\n";
+                    cout << "2) Add ticket\n";
+                    cout << "3) Delete ticket\n";
+                    cout << "4) Search ticket\n";
+                    cout << "5) Exit\n";
                     cout << "Choose an option: ";
                     cin >> option;
 
@@ -178,31 +239,50 @@ int main() {
                         }
                         case 2: {
                             Ticket ticket;
-                            cout << "Enter Departure: ";
-                            cin >> ticket.departure;
-                            cout << "Enter Destination: ";
-                            cin >> ticket.destination;
-                            cout << "Enter Day (DD): ";
+
+                            system("CLS");
+                            do {
+                                cout << "Enter Departure    : ";
+                                cin >> ticket.departure;
+                            } while (containsDigit(ticket.departure));
+
+                            do{
+                                cout << "Enter Destination  : ";
+                                cin >> ticket.destination;
+                            } while (containsDigit(ticket.destination));
+
+                            do {
+                                cout << "Enter ticket code  : ";
+                                cin >> ticket.code;
+                            } while (containsDigit(ticket.code));
+
+                            cout << "Enter Day (DD)     : ";
                             cin >> ticket.date.day;
-                            cout << "Enter Month (MM): ";
+                            cout << "Enter Month (MM)   : ";
                             cin >> ticket.date.month;
-                            cout << "Enter Year (YYYY): ";
+                            cout << "Enter Year (YYYY)  : ";
                             cin >> ticket.date.year;
-                            cout << "Enter Time: ";
-                            cin >> ticket.time;
-                            cout << "Enter Price: ";
-                            cin >> ticket.price;
+
+                            do {
+                                cout << "Enter Time         : ";
+                                cin >> ticket.time;
+                            } while (ticket.time.size() != 5 || timeValidation(ticket.time));
                             loginSystem.addTicket(ticket);
                             break;
                         }
                         case 3: {
-                            int index;
-                            cout << "Enter ticket index: ";
-                            cin >> index;
-                            loginSystem.deleteTicket(index);
+                            cout << "Enter ticket code: ";
+                            cin >> searchCode;
+                            loginSystem.deleteTicket(searchCode);
                             break;
                         }
                         case 4: {
+                            cout << "Enter ticket code: ";
+                            cin >> searchCode;
+                            loginSystem.showTicket(searchCode);
+                            break;
+                        }
+                        case 5: {
                             cout << "Exiting..." << endl;
                             break;
                         }
@@ -211,11 +291,11 @@ int main() {
                             break;
                         }
                     }
-                } while (option != 4);
+                } while (option != 5);
             } else {
                 cout << "Invalid username or password!" << endl;
             }
-        } else if (login == 2) {  // User
+        } else if (login == 2) {// User
             do {               
                 cout << "Options:\n";
                 cout << "1) Buy Ticket\n";
@@ -228,7 +308,6 @@ int main() {
                 switch (option) {
                     case 1: {
                         loginSystem.displayTickets();
-                        int index;
                         cout << "Enter the index of desired ticket: ";
                         cin >> index;
                         Ticket ticket = loginSystem.getTicket(index);
@@ -265,14 +344,12 @@ int main() {
                                     break;
                                 }
                                 case 3: {
-                                    int index;
                                     cout << "Enter todo index: ";
                                     cin >> index;
                                     bookingSystem.markTodoAsDone(index);
                                     break;
                                 }
                                 case 4: {
-                                    int index;
                                     cout << "Enter todo index: ";
                                     cin >> index;
                                     bookingSystem.deleteTodo(index);
