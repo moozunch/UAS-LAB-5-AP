@@ -47,7 +47,7 @@ private:
 public:
     void displayTickets()
     {
-        
+        system("CLS");
         if (tickets.empty())
         {
             cout << "No tickets available!" << endl;
@@ -55,6 +55,7 @@ public:
         }
         else
         {
+            system("CLS");
             cout << "Tickets List:" << endl;
             for (int i = 0; i < tickets.size(); i++)
             {
@@ -66,14 +67,14 @@ public:
                 cout << "Price  : Rp" << tickets[i].price << '/' << "person" << endl;
                 cout << "Code   : " << tickets[i].code << endl;
                 cout << "------------------------" << endl;
-                system("PAUSE");
             }
-            
+            system("PAUSE");
         }
     }
 
     void addTicket(const Ticket &ticket)
     {
+        system("CLS");
         tickets.push_back(ticket);
         cout << "Ticket added successfully!" << endl;
         system("PAUSE");
@@ -86,6 +87,7 @@ public:
         {
             if (targetCode->code == searchCode)
             {
+                system("CLS");
                 targetCode = tickets.erase(targetCode);
                 cout << "Ticket with code " << searchCode << " have been removed" << endl;
                 found = true;
@@ -95,6 +97,7 @@ public:
         }
         if (!found)
         {
+            system("CLS");
             cout << "There are no ticket with code " << searchCode << endl;
             system("PAUSE");
         }
@@ -108,6 +111,7 @@ public:
         {
             if (ticket.code == searchCode)
             {
+                system("CLS");
                 cout << "Ticket Found:" << endl;
                 cout << "------------------------" << endl;
                 cout << "From   : " << ticket.departure << endl;
@@ -124,6 +128,7 @@ public:
         }
         if (!found)
         {
+            system("CLS");
             cout << "There are no tickets with code " << searchCode << endl;
             system("PAUSE");
         }
@@ -151,6 +156,7 @@ public:
         }
         else
         {
+            system("CLS");
             cout << "Ticket Found:" << endl;
             cout << "------------------------" << endl;
             cout << "From   : " << foundTicket.departure << endl;
@@ -160,8 +166,8 @@ public:
             cout << "Price  : Rp" << foundTicket.price << '/' << "person" << endl;
             cout << "Code   : " << foundTicket.code << endl;
             cout << "------------------------" << endl;
-            system("PAUSE");
             return foundTicket;
+            system("PAUSE");
         }
     }
 };
@@ -175,6 +181,7 @@ private:
 public:
     void bookTicket(const Ticket &ticket, LoginSystem &loginSystem)
     {
+        system("CLS");
         bookedTickets.push_back(ticket);
         loginSystem.deleteTicket(ticket.code);
         cout << "Ticket booked successfully!" << endl;
@@ -183,14 +190,15 @@ public:
 
     void displayBookedTickets()
     {
-        
         if (bookedTickets.empty())
         {
+            system("CLS");
             cout << "No tickets bought yet!" << endl;
             system("PAUSE");
         }
         else
         {
+            system("CLS");
             cout << "Bought Tickets:" << endl;
             for (const auto &ticket : bookedTickets)
             {
@@ -218,6 +226,7 @@ public:
         todo.task = task;
         todo.done = false;
         todos.push_back(todo);
+        system("CLS");
         cout << "Todo added successfully!" << endl;
         system("PAUSE");
     }
@@ -227,11 +236,13 @@ public:
         
         if (todos.empty())
         {
+            system("CLS");
             cout << "No todos added yet!" << endl;
             system("PAUSE");
         }
         else
         {
+            system("CLS");
             cout << "Todos:" << endl;
             for (const auto &todo : todos)
             {
@@ -245,15 +256,16 @@ public:
 
     void markTodoAsDone(int index)
     {
-        
         if (index >= 0 && index < todos.size())
         {
+            system("CLS");
             todos[index].done = true;
             cout << "Todo marked as done!" << endl;
-system("PAUSE");
+            system("PAUSE");
         }
         else
         {
+            system("CLS");
             cout << "Invalid todo index!" << endl;
             system("PAUSE");
         }
@@ -264,12 +276,14 @@ system("PAUSE");
         
         if (index >= 0 && index < todos.size())
         {
+            system("CLS");
             todos.erase(todos.begin() + index);
             cout << "Todo deleted successfully!" << endl;
             system("PAUSE");
         }
         else
         {
+            system("CLS");
             cout << "Invalid todo index!" << endl;
             system("PAUSE");
         }
@@ -292,6 +306,7 @@ int main()
 
         if (login == 1)
         { // admin
+            system("CLS");
             cout << "Username: ";
             cin >> username;
             cout << "Password: ";
@@ -316,7 +331,6 @@ int main()
                     {
                         Ticket ticket;
 
-                        
                         do
                         {
                             cout << "Enter Departure    : ";
@@ -378,11 +392,13 @@ int main()
                     {
                         cout << "Exiting..." << endl;
                         break;
+                        system("PAUSE");
                     }
                     default:
                     {
                         cout << "Invalid option!" << endl;
                         break;
+                        system("PAUSE");
                     }
                     }
                 } while (option != 5);
@@ -452,6 +468,7 @@ int main()
                 }
                 case 5:
                 {
+                    showTodoListMenu();
                     int todoOption;
                     do
                     {
@@ -489,10 +506,6 @@ int main()
                             bookingSystem.deleteTodo(index);
                             break;
                         }
-                        case 5:
-                        {
-                            break;
-                        }
                         default:
                         {
                             cout << "Invalid option!" << endl;
@@ -506,6 +519,7 @@ int main()
                 {
                     cout << "Invalid option!" << endl;
                     break;
+                    system("PAUSE");
                 }
                 }
             } while (option != 6);
