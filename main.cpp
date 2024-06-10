@@ -442,7 +442,7 @@ int main()
                 case 4:
                 {
                     vector<Ticket> bookedTickets = bookingSystem.getBookedTickets();
-                    ofstream outFile("BoughtTickets.txt");
+                    ofstream outFile("BookedTickets.txt");
                     for (const Ticket &ticket : bookedTickets)
                     {
                         outFile << "------------------------\n";
