@@ -37,7 +37,7 @@
 #### 3.3 View All Ticket - See all the ticket that hasn't booked
 ![image](https://github.com/moozunch/UAS-LAB-5-AP/assets/112236945/6b51426c-f9c3-4147-b3fd-753a14262a8c)
 
-#### 3.4 Print Bought Ticket - TXT file of booked ticket
+#### 3.4 Print Booked Ticket - TXT file of booked ticket
 ![image](https://github.com/moozunch/UAS-LAB-5-AP/assets/112236945/c46e569c-11a4-4870-8c86-9bdc7c0d38d3)
 
 #### 3.5 TODO - This is a travel program, ofc the things you need to on your vacation is here!
