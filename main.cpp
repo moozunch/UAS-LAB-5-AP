@@ -166,8 +166,8 @@ public:
             cout << "Price  : Rp" << foundTicket.price << '/' << "person" << endl;
             cout << "Code   : " << foundTicket.code << endl;
             cout << "------------------------" << endl;
-            return foundTicket;
             system("PAUSE");
+            return foundTicket;
         }
     }
 };
@@ -468,11 +468,10 @@ int main()
                 }
                 case 5:
                 {
-                    showTodoListMenu();
                     int todoOption;
                     do
                     {
-
+                        showTodoListMenu();
                         cout << "Choose an option: ";
                         cin >> todoOption;
 
