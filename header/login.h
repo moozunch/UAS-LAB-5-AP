@@ -5,7 +5,7 @@ using namespace std;
 
 int loginOption()
 {
-    // system("CLS");
+    system("CLS");
     int login;
     cout << "=========== My Travel ===========\n";
     cout << "1. Admin\n";
