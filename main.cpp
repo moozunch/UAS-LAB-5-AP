@@ -10,12 +10,6 @@ using namespace std;
 string searchCode;
 bool found;
 
-struct User
-{
-    string username;
-    string password;
-};
-
 struct Date
 {
     int day;
@@ -133,14 +127,13 @@ public:
             system("PAUSE");
         }
     }
-
+    
     Ticket getTicket(const string &searchCode)
     {
-        
         found = false;
         Ticket foundTicket;
-
-        for (const auto &ticket : tickets)
+        
+        for (const auto &ticket : tickets) 
         {
             if (ticket.code == searchCode)
             {
@@ -295,10 +288,8 @@ int main()
     LoginSystem loginSystem;
     TicketBookingSystem bookingSystem;
     string username, password;
-    string savedUsername = "admin", savedPassword = "admin123";
-    int option;
-    int login;
-    int index;
+    const string savedUsername = "admin", savedPassword = "admin123";
+    int option, login, index;
 
     do
     {
@@ -406,6 +397,7 @@ int main()
             else
             {
                 cout << "Invalid username or password!" << endl;
+                system("PAUSE");
             }
         }
         else if (login == 2)
@@ -454,12 +446,12 @@ int main()
                     for (const Ticket &ticket : bookedTickets)
                     {
                         outFile << "------------------------\n";
-                        outFile << "Price: " << ticket.price << "\n";
-                        outFile << "Departure: " << ticket.departure << "\n";
-                        outFile << "Destination: " << ticket.destination << "\n";
-                        outFile << "Date: " << ticket.date.day << "/" << ticket.date.month << "/" << ticket.date.year << "\n";
-                        outFile << "Time: " << ticket.time << "\n";
-                        outFile << "Code: " << ticket.code << "\n";
+                        outFile << "Price       : " << ticket.price << "\n";
+                        outFile << "Departure   : " << ticket.departure << "\n";
+                        outFile << "Destination : " << ticket.destination << "\n";
+                        outFile << "Date        : " << ticket.date.day << "/" << ticket.date.month << "/" << ticket.date.year << "\n";
+                        outFile << "Time        : " << ticket.time << "\n";
+                        outFile << "Code        : " << ticket.code << "\n";
                         outFile << "------------------------\n";
                     }
                     outFile.close();
