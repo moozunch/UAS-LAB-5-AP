@@ -1,8 +1,8 @@
 ------------------------
-Price: 25000
-Departure: Medan
-Destination: Jakarta
-Date: 5/4/2024
-Time: 18:00
-Code: abc
+Price       : 25000
+Departure   : Siantar
+Destination : Medan
+Date        : 31/1/2024
+Time        : 15:00
+Code        : abc
 ------------------------
