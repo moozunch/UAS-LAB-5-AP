@@ -5,7 +5,7 @@ using namespace std;
 
 int loginOption()
 {
-    system("CLS");
+    // system("CLS");
     int login;
     cout << "=========== My Travel ===========\n";
     cout << "1. Admin\n";
@@ -96,7 +96,7 @@ bool timeValidation(const string &checkValue)
     return false;
 }
 
-bool isValidDate(int day, int month, int year)
+bool isValidDate(int &day, int &month, int &year)
 {
     if (year != 2024 || month < 1 || month > 12 || day < 1 || day > 31)
     {
