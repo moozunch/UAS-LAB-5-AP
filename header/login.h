@@ -32,7 +32,7 @@ void showUserMenu(){
     cout << "1) Buy Ticket\n";
     cout << "2) View Ticket History\n";
     cout << "3) View All Tickets\n";
-    cout << "4) Print Bought Ticket\n";
+    cout << "4) Print Booked Ticket\n";
     cout << "5) Todo List\n";
     cout << "6) Exit\n";
 }

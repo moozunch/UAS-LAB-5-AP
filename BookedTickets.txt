@@ -2,7 +2,7 @@
 Price       : 25000
 Departure   : Siantar
 Destination : Medan
-Date        : 31/1/2024
-Time        : 15:00
+Date        : 10/6/2024
+Time        : 18:00
 Code        : abc
 ------------------------
