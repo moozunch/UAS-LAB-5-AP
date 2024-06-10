@@ -54,7 +54,7 @@ is a program that can organize the user's vacation. The user can buy tickets and
 
 
 ## Demo
-[Link Video Demonstrasi](https://drive.google.com/file/d/1QwzTnMDC9EZeiQ7QomVpbyIDc1leBq_X/view?usp=sharing)
+[Link Video Demonstrasi](https://drive.google.com/file/d/1QwzTnMDC9EZeiQ7QomVpbyIDc1leBq_X/view?usp=sharing) <br>
 ps: maaf bang bagian jeremy kepotong lupa dipencet tombol mulainya ✌
 
 
